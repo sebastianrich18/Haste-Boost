@@ -1,0 +1,15 @@
+name: HasteBoost
+version: '${project.version}'
+main: me.srichel.hasteboost.HasteBoost
+api-version: 1.18
+authors: [ SebastianRichel ]
+description: Boost Haste 2 Effect to allow for insta mining deepslate
+commands:
+  hb:
+    description: Main command for HasteBoost
+    usage: /hb [mute | unmute | showconfig | reload]
+    aliases:
+      - hasteboost
+permissions:
+  hb:
+    default: op
