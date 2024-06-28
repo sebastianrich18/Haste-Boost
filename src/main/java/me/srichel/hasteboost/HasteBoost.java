@@ -5,9 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,8 +15,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public final class HasteBoost extends JavaPlugin implements Listener {
@@ -79,7 +75,7 @@ public final class HasteBoost extends JavaPlugin implements Listener {
         Player p = e.getPlayer();
         boolean isBelowYLvl = p.getLocation().getY() < config.getInt("yLvl");
         boolean hasNetheriteInHand = p.getInventory().getItemInMainHand().getType() == this.inHand;
-        boolean isInHaste = p.getPotionEffect(PotionEffectType.FAST_DIGGING) != null;
+        boolean isInHaste = p.getPotionEffect(PotionEffectType.HASTE) != null;
         if (config.getBoolean("netheritePicOnly")) {
             if (isInHaste && isBelowYLvl && hasNetheriteInHand) {
                applyEffect(e, p);
@@ -92,7 +88,7 @@ public final class HasteBoost extends JavaPlugin implements Listener {
     }
 
     public void applyEffect(BeaconEffectEvent e, Player p) {
-        e.setEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 200, config.getInt("boostAmplifier")));
+        e.setEffect(new PotionEffect(PotionEffectType.HASTE, 200, config.getInt("boostAmplifier")));
         if (!this.isMuted) {
             log.info("Boosting Haste for: " + p.getName());
         }
